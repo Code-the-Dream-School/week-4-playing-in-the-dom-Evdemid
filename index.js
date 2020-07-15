@@ -50,23 +50,27 @@ removeBtn.addEventListener("click", function () {
 //And display the results in the elements with the 'id = volume' and 'id = area' respectively
 //hint: the volumen of a sphere is ((4/3) × π × r^3) and the surface area is (4 × π × r^2)
 
-let parentDiv3 = document.getElementById("a-3");
-let radius = +document.querySelector("#radius").value;
-let sphereVolume;
-let sphereArea;
-let calcBtn = document.querySelector("#submit");
+let parentDiv3 = document.getElementById("a-3");//assignment of parent of form to newly declared variable
 
-calcBtn.addEventListener("click", (radius) => {
-  sphereVolume = (4 / 3) * Math.PI * radius ** 3;
-  document.querySelector("#volume").value = toString(sphereVolume);
-});
+// assignment of input for radius value to newly declared variable after its coercion to number type.
+let radius = Number(document.querySelector("#radius").value);
+let sphereVolume;//declared variable for radius
+let sphereArea;//declared variable for area
+let calcBtn = document.querySelector("#submit");//get button #submit and assign it to the newly declared variable
+
+//event for calculating sphere volume
+calcBtn.addEventListener("click",(calculate_sphere = (radius) => {
+    sphereVolume = (4 / 3) * Math.PI * radius ** 3;
+    document.querySelector("#volume").value = toString(sphereVolume);
+  })
+);
+//event for calculating sphere area
 calcBtn.addEventListener("click", (radius) => {
   sphereArea = 4 * Math.PI * radius ** 2;
   document.querySelector("#area").value = toString(sphereArea);
 });
 
-window.onload = document.getElementById("MyForm").onsubmit = sphereVolume; // this execute the volume_sphere function each time the calculate (submit) button is clicked
-//window.onload = document.getElementById('MyForm').onsubmit = calculate_sphere; // this execute the volume_sphere function each time the calculate (submit) button is clicked
+window.onload = document.getElementById("MyForm").onsubmit = calculate_sphere; // this execute the volume_sphere function each time the calculate (submit) button is clicked
 
 //------------------------Question 4 ---------------------------
 //Now in this Exercise we want you to create 3 buttons wich clicks actions are going to hide the respective
@@ -76,38 +80,41 @@ window.onload = document.getElementById("MyForm").onsubmit = sphereVolume; // th
 
 //resolve // QUESTION 4 here
 
-let parentDiv4 = document.getElementById("a-4");
+let parentDiv4 = document.getElementById("a-4"); //the parent of buttons, which are to be created
 
 for (let i = 0; i < 3; i++) {
-  let task4Btn = document.createElement("button");
-  parentDiv4.appendChild(task4Btn);
-  parentDiv4.children[i].id = `magic${i + 1}`;
-  parentDiv4.children[i].innerHTML = `Hide the task # ${i + 1}`;
+  //a loop through all 3 buttons.
+  let task4Btn = document.createElement("button"); //button is created and assigned to variable
+    parentDiv4.appendChild(task4Btn); //button is placed as a child of parentDiv4
+  parentDiv4.children[i].id = `magic${i + 1}`; //placing id for each button using the counter
+  parentDiv4.children[i].innerHTML = `Hide the task # ${i + 1}`; //placing innerHTML for each button using the counter
 }
-let questContainer = document.querySelector(".question-container");
+
+//setup of visibility property to the ".question-label"
+let questContainer = document.querySelector(".question-container"); 
 questContainer.children[0].style.visibility = "visible";
 questContainer.children[1].style.visibility = "visible";
 questContainer.children[2].style.visibility = "visible";
 
+//creating of the click event listener on the level of buttons' parent
 parentDiv4.addEventListener("click", (event) => {
-    if (event.target.id == "MAGIC1") {
-        if (quest1Div.style.visibility == "visible") {
-        quest1Div.style.visibility = "hidden";
-    } else if (quest1Div.style.visibility == "hidden") {
-        quest1Div.style.visibility = "visible";
+  if (event.target.id === "magic1") {
+    if (questContainer.children[0].style.visibility === "visible") {
+      questContainer.children[0].style.visibility = "hidden";
+    } else if (questContainer.children[0].style.visibility == "hidden") {
+      questContainer.children[0].style.visibility = "visible";
     }
-    } else if (event.target.id == "MAGIC2") {
-        if (quest2Div.style.visibility == "visible") {
-            quest2Div.style.visibility = "hidden";
-        } else if (quest2Div.style.visibility == "hidden") {
-            quest1Div.style.visibility = "visible";
-        }
-    } else if (event.target.id == "MAGIC3") {
-        if (quest3Div.style.visibility == "visible") {
-            quest3Div.style.visibility = "hidden";
-        } else if (quest1Div.style.visibility == "hidden") {
-            quest3Div.style.visibility = "visible";
-        }
-    }    
-    
+  } else if (event.target.id == "magic2") {
+    if (questContainer.children[1].style.visibility === "visible") {
+      questContainer.children[1].style.visibility = "hidden";
+    } else if (questContainer.children[1].style.visibility == "hidden") {
+      questContainer.children[1].style.visibility = "visible";
+    }
+  } else if (event.target.id == "magic3") {
+    if (questContainer.children[2].style.visibility == "visible") {
+      questContainer.children[2].style.visibility = "hidden";
+    } else if (questContainer.children[2].style.visibility == "hidden") {
+      questContainer.children[2].style.visibility = "visible";
+    }
+  }
 });
