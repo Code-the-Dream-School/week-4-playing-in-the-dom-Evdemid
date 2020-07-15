@@ -5,11 +5,14 @@
 //Each time the user clicks on the new element it has to respond changing the displayed text 'x' to 'o'
 
 //resolve // QUESTION 1 here
-let newDiv = document.createElement("div");
-let parentDiv1 = document.getElementById("a-1");
-parentDiv1.appendChild(newDiv);
-newDiv.className = "square";
+let newDiv = document.createElement("div"); //new div element is created
+let parentDiv1 = document.getElementById("a-1"); //get a div which is to be a parent for our new div
+parentDiv1.appendChild(newDiv); //new div element is appended to its parent
+newDiv.className = "square"; //a class name for the new div element is set
+
+//a listener for the click event is set on the new div element
 newDiv.addEventListener("click", function () {
+  //an action for the event is set: change of the inner html content via ternary operator
   newDiv.innerHTML = newDiv.innerHTML === "x" ? "o" : "x";
 });
 
@@ -20,25 +23,26 @@ newDiv.addEventListener("click", function () {
 //you also need to create a button that makes the remove action of the element selected
 // append the new list as a child of the element with the 'id = a-2'
 // append the button as a child of the element with the 'id = a-2'
+
+//resolve // QUESTION 2 here
 const colors = ["red", "white", "black", "green", "orange"];
 
 let parentDiv2 = document.getElementById("a-2");
-let dropdList = document.createElement("select");
-let removeBtn = document.createElement("button");
-removeBtn.innerHTML = "Remove the option";
+let dropdList = document.createElement("select"); //creating an element for dropdown list and assigning it to the newly declared variable
+let removeBtn = document.createElement("button"); //creating an element for a button and assigning it to the newly declared variable
+removeBtn.innerHTML = "Remove the option"; //button text
+//new elements are placed in DOM nested in the parent element
 parentDiv2.appendChild(dropdList);
 parentDiv2.appendChild(removeBtn);
-//resolve // QUESTION 2 here
 
+//creting the dropdown list
 for (var i = 0; i < colors.length; i++) {
   let option = document.createElement("option");
   option.value = colors[i];
   option.text = colors[i];
   dropdList.appendChild(option);
 }
-// removeBtn.addEventListener("mouseover", function () {
-//     removeBtn.style.backgroundColor = dropdList.selectIndex.style.color;
-// });
+//function for removing the selected option
 removeBtn.addEventListener("click", function () {
   dropdList.remove(dropdList.selectIndex);
 });
@@ -50,26 +54,20 @@ removeBtn.addEventListener("click", function () {
 //And display the results in the elements with the 'id = volume' and 'id = area' respectively
 //hint: the volumen of a sphere is ((4/3) × π × r^3) and the surface area is (4 × π × r^2)
 
-let parentDiv3 = document.getElementById("a-3");//assignment of parent of form to newly declared variable
+const calculate_sphere = (event) => {
+  event.preventDefault(); //prevention  from submitting the form (to keep data)
+  // assignment of input for radius value to newly declared variable after its coercion to number type.
 
-// assignment of input for radius value to newly declared variable after its coercion to number type.
-let radius = Number(document.querySelector("#radius").value);
-let sphereVolume;//declared variable for radius
-let sphereArea;//declared variable for area
-let calcBtn = document.querySelector("#submit");//get button #submit and assign it to the newly declared variable
+  let radius = Number(document.querySelector("#radius").value);
+  let sphereVolume = (4 / 3) * Math.PI * Math.pow(radius, 3); //declared variable for volume and assigning to it the result of math expression
+  let sphereArea = 4 * Math.PI * Math.pow(radius, 2); //declared variable for area and assigning to it the result of math expression
 
-//event for calculating sphere volume
-calcBtn.addEventListener("click",(calculate_sphere = (radius) => {
-    sphereVolume = (4 / 3) * Math.PI * radius ** 3;
-    document.querySelector("#volume").value = toString(sphereVolume);
-  })
-);
-//event for calculating sphere area
-calcBtn.addEventListener("click", (radius) => {
-  sphereArea = 4 * Math.PI * radius ** 2;
-  document.querySelector("#area").value = toString(sphereArea);
-});
-
+  let volumeData = document.querySelector("#volume"); //get the element for volume data
+  let areaData = document.querySelector("#area"); //get the element for area data
+  //assign the results of math expressions to the values of elements for V and A
+  volumeData.value = sphereVolume;
+  areaData.value = sphereArea;
+};
 window.onload = document.getElementById("MyForm").onsubmit = calculate_sphere; // this execute the volume_sphere function each time the calculate (submit) button is clicked
 
 //------------------------Question 4 ---------------------------
@@ -82,16 +80,16 @@ window.onload = document.getElementById("MyForm").onsubmit = calculate_sphere; /
 
 let parentDiv4 = document.getElementById("a-4"); //the parent of buttons, which are to be created
 
+//creating buttons
 for (let i = 0; i < 3; i++) {
-  //a loop through all 3 buttons.
   let task4Btn = document.createElement("button"); //button is created and assigned to variable
-    parentDiv4.appendChild(task4Btn); //button is placed as a child of parentDiv4
+  parentDiv4.appendChild(task4Btn); //button is placed as a child of parentDiv4
   parentDiv4.children[i].id = `magic${i + 1}`; //placing id for each button using the counter
-  parentDiv4.children[i].innerHTML = `Hide the task # ${i + 1}`; //placing innerHTML for each button using the counter
+  parentDiv4.children[i].innerHTML = `Hide and show the task # ${i + 1}`; //placing innerHTML for each button using the counter
 }
 
 //setup of visibility property to the ".question-label"
-let questContainer = document.querySelector(".question-container"); 
+let questContainer = document.querySelector(".question-container");
 questContainer.children[0].style.visibility = "visible";
 questContainer.children[1].style.visibility = "visible";
 questContainer.children[2].style.visibility = "visible";
