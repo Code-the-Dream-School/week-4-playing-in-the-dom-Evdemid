@@ -88,28 +88,26 @@ for (let i = 0; i < 3; i++) {
   parentDiv4.children[i].innerHTML = `Hide and show the task # ${i + 1}`; //placing innerHTML for each button using the counter
 }
 
-//setup of visibility property to the ".question-label"
+//get .question-container, which is supposed to be hidden and shown up to fulfil requirements of the task
+//and assign it to a newly declared variable
 let questContainer = document.querySelector(".question-container");
-questContainer.children[0].style.visibility = "visible";
-questContainer.children[1].style.visibility = "visible";
-questContainer.children[2].style.visibility = "visible";
 
 //creating of the click event listener on the level of buttons' parent
 parentDiv4.addEventListener("click", (event) => {
   if (event.target.id === "magic1") {
-    if (questContainer.children[0].style.visibility === "visible") {
+    if (questContainer.children[0].style.visibility !== "hidden") {
       questContainer.children[0].style.visibility = "hidden";
     } else if (questContainer.children[0].style.visibility == "hidden") {
       questContainer.children[0].style.visibility = "visible";
     }
   } else if (event.target.id == "magic2") {
-    if (questContainer.children[1].style.visibility === "visible") {
+    if (questContainer.children[1].style.visibility !== "hidden") {
       questContainer.children[1].style.visibility = "hidden";
     } else if (questContainer.children[1].style.visibility == "hidden") {
       questContainer.children[1].style.visibility = "visible";
     }
   } else if (event.target.id == "magic3") {
-    if (questContainer.children[2].style.visibility == "visible") {
+    if (questContainer.children[2].style.visibility !== "hidden") {
       questContainer.children[2].style.visibility = "hidden";
     } else if (questContainer.children[2].style.visibility == "hidden") {
       questContainer.children[2].style.visibility = "visible";
