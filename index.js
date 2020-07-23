@@ -44,8 +44,11 @@ for (var i = 0; i < colors.length; i++) {
 }
 //function for removing the selected option
 removeBtn.addEventListener("click", function () {
-  dropdList.remove(dropdList.selectIndex);
+  dropdList.remove(dropdList.selectedIndex);
 });
+
+
+
 
 //------------------------Question 3 ---------------------------
 //Now lets mix some maths and programming. In the function below (calculate_sphere) write a JavaScript program
